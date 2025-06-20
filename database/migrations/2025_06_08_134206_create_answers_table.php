@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('question_id')->constrained()->onDelete('cascade');
-            $table->char('code', 1); // kode A–J
-            $table->string('answer_text'); // isi jawaban
+            $table->text('answer_text'); // isi kalimat jawaban
+            $table->foreignId('spirit_id')->constrained()->onDelete('cascade'); // mengarah ke spirit
             $table->timestamps();
-
-            $table->unique(['question_id', 'code']); // tiap kode unik per pertanyaan
         });
+
     }
 
 

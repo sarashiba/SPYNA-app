@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->integer('number')->unique(); // nomor soal (1–10)
-            $table->string('background_image')->nullable(); // nama file gambar
-            $table->text('question_text'); // isi pertanyaan
+            $table->text('question'); // pertanyaannya
+            $table->string('background')->nullable(); // path gambar bg
             $table->timestamps();
         });
+
     }
 
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash; // Pastikan ini ada jika register di sini
+use App\Models\User; // Pastikan ini ada jika register di sini
 
 class LoginController extends Controller
 {
@@ -17,13 +19,12 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // Cek apakah email adalah admin
             if (Auth::user()->email === 'admin@gmail.com') {
                 return redirect()->route('admin.dashboard');
             }
 
-            // Selain itu user biasa
-            return redirect()->route('user.dashboard');
+            // Redirect ke halaman utama (home) setelah login user biasa
+            return redirect()->route('home'); 
         }
 
         return back()->withErrors([
@@ -39,4 +40,5 @@ class LoginController extends Controller
 
         return redirect('/login');
     }
+
 }

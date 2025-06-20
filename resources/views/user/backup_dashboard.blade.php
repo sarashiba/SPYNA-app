@@ -1,5 +1,3 @@
-{{-- resources/views/user/home.blade.php --}}
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -8,8 +6,8 @@
     <title>Spirit Animal</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
-    {{-- Jika Anda menggunakan Vite untuk CSS (misalnya resources/css/app.css) --}}
-    {{-- @vite('resources/css/app.css') --}} 
+    {{-- Jika Anda menggunakan Vite untuk CSS --}}
+    {{-- @vite('resources/css/app.css') --}}
 
     <style>
         * {
@@ -29,13 +27,13 @@
             position: relative;
             min-height: 100vh;
             width: 100%;
-            background-image: url('{{ asset('storage/images/Gambar 1.png') }}');
+            background-image: url('{{ asset('storage/images/Gambar 1.png') }}'); /* Menggunakan asset() untuk gambar background */
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-color: black;
-            display: flex;
+            display: flex; /* Untuk memposisikan overlay-bottom */
             flex-direction: column;
             justify-content: flex-end; /* Mendorong konten utama ke bawah */
         }
@@ -45,7 +43,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 40px;
-            position: absolute;
+            position: absolute; /* Tetap absolute agar di atas hero */
             top: 0;
             width: 100%;
             z-index: 2;
@@ -89,12 +87,6 @@
             color: white;
         }
 
-        .nav-auth {
-            display: flex; /* Tambahkan display flex untuk mengatur elemen di kanan */
-            align-items: center; /* Pusatkan secara vertikal */
-            gap: 10px; /* Beri sedikit jarak antar elemen */
-        }
-
         .nav-auth a {
             text-decoration: none;
             color: white;
@@ -104,11 +96,11 @@
             border: 1px solid transparent; /* Tambahkan border transparan untuk konsistensi ukuran */
         }
 
-        .nav-auth a.signin-btn { /* Kelas spesifik untuk tombol Sign In */
+        .nav-auth a.signin-btn {
             border-color: white; /* Border untuk Sign In */
         }
 
-        .nav-auth a.signup-btn { /* Kelas spesifik untuk tombol Sign Up */
+        .nav-auth a.signup-btn {
             background-color: rgba(19, 1, 1, 0.897);
         }
 
@@ -176,12 +168,6 @@
             font-size: 20px;
         }
 
-        /* Gaya untuk tombol START QUIZ yang disabled */
-        .main-text a.start-quiz-btn.disabled {
-            opacity: 0.5; /* Agak transparan */
-            cursor: not-allowed; /* Kursor tidak bisa diklik */
-        }
-
         @media screen and (max-width: 768px) {
             .navbar {
                 padding: 15px 20px;
@@ -238,14 +224,15 @@
         <div class="navbar">
             <div class="navbar-left">
                 <div class="logo">
+                    {{-- Logo SPYNA (static asset from storage/images/Vector.png) --}}
                     <img src="{{ asset('storage/images/Vector.png') }}" alt="Logo" /> SPYNA
                 </div>
                 <div class="nav-main">
-                    <a href="{{ route('home') }}">Home</a>
+                    <a href="{{ url('/') }}">Home</a> {{-- Link ke halaman beranda --}}
                     <span class="nav-divider">-</span>
-                    <a href="{{ route('about') }}">About</a>
+                    <a href="{{ url('/about') }}">About</a>
                     <span class="nav-divider">-</span>
-                    <a href="{{ route('contact') }}">Contact</a>
+                    <a href="{{ url('/contact') }}">Contact</a>
                 </div>
             </div>
 
@@ -271,14 +258,8 @@
             <div class="main-text">
                 <h1>SPIRIT ANIMAL</h1>
                 <p>Apakah kamu seekor rubah cerdik, singa pemberani, atau kucing yang cuek? <br/> Yuk cari tahu hanya dalam beberapa menit!</p>
-                
                 {{-- Link ke halaman start quiz --}}
-                @auth
-                    <a href="{{ route('user.quiz.show') }}" class="start-quiz-btn">START QUIZ →</a>
-                @else
-                    {{-- Jika belum login, tombol disabled  --}}
-                    <a href="#" class="start-quiz-btn disabled" onclick="alert('Anda harus login untuk memulai kuis!'); return false;">START QUIZ →</a>
-                @endauth
+                <a href="{{ route('user.quiz.show') }}" class="start-quiz-btn">START QUIZ →</a>
             </div>
         </div>
     </div>

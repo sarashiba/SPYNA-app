@@ -9,14 +9,24 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminMiddleware
 {
-    public function handle(Request $request, Closure $next)
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
     {
-        // Cek apakah user sudah login dan emailnya admin@gmail.com
-        if (Auth::check() && Auth::user()->role === 'admin') {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Anda perlu login untuk mengakses halaman ini.');
+        }
+
+        // GUNAKAN role, bukan email
+        if (strtolower(Auth::user()->role) === 'admin'){
             return $next($request);
         }
 
-        // Kalau bukan admin, redirect ke halaman homepage
-        return redirect()->route('user.dashboard');
+        return redirect()->route('home')->with('error', 'Anda tidak memiliki akses ke halaman admin.');
     }
+
 }
+

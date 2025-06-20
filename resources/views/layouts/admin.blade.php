@@ -15,22 +15,22 @@
 
 <div class="flex h-screen overflow-hidden">
     {{-- Sidebar --}}
-    <aside class="w-1/5 text-white flex flex-col" style="background-color: #0b1f4b;">
+    <aside class="text-white flex flex-col flex-shrink-0" style="background-color: #0b1f4b; width: 280px;"> {{-- Perbaikan: Atur lebar tetap --}}
         <h2 class="text-3xl font-bold px-6 py-6 border-b border-gray-800 select-none">SPYNA</h2>
         <nav class="flex flex-col flex-grow">
             <a href="{{ route('admin.dashboard') }}" class="px-6 py-3 border-l-4 flex items-center space-x-3 hover:bg-[#1f365d] {{ request()->routeIs('admin.dashboard') ? 'bg-[#243b61] border-white' : 'border-transparent' }}">
                 <img src="{{ asset('storage/images/icon/dashboard.png') }}" alt="Dashboard" class="w-5 h-5">
                 <span>Dashboard</span>
             </a>
-            <a href="#" class="px-6 py-3 flex items-center space-x-3 hover:bg-[#1f365d]">
+            <a href="{{ route('admin.users.index') }}" class="px-6 py-3 border-l-4 flex items-center space-x-3 hover:bg-[#1f365d] {{ request()->routeIs('admin.users.index') ? 'bg-[#243b61] border-white' : 'border-transparent' }}">
                 <img src="{{ asset('storage/images/icon/users.png') }}" alt="Users" class="w-5 h-5">
                 <span>Users</span>
             </a>
-            <a href="#" class="px-6 py-3 flex items-center space-x-3 hover:bg-[#1f365d]">
+            <a href="{{ route('questions.index') }}" class="px-6 py-3 border-l-4 flex items-center space-x-3 hover:bg-[#1f365d] {{ request()->routeIs('questions.index') ? 'bg-[#243b61] border-white' : 'border-transparent' }}">
                 <img src="{{ asset('storage/images/icon/quiz.png') }}" alt="Quiz Management" class="w-5 h-5">
                 <span>Quiz Management</span>
             </a>
-            <a href="#" class="px-6 py-3 flex items-center space-x-3 hover:bg-[#1f365d]">
+            <a href="{{ route('spirits.index') }}" class="px-6 py-3 border-l-4 flex items-center space-x-3 hover:bg-[#1f365d] {{ request()->routeIs('spirits.index') ? 'bg-[#243b61] border-white' : 'border-transparent' }}">
                 <img src="{{ asset('storage/images/icon/spirit.png') }}" alt="Spirit Management" class="w-5 h-5">
                 <span>Spirit Management</span>
             </a>
@@ -44,7 +44,7 @@
     </aside>
 
     {{-- Main Content --}}
-    <main class="flex-grow p-8 overflow-auto">
+    <main class="flex-grow p-8 overflow-y-auto"> {{-- Perbaikan: flex-grow dan overflow-y-auto --}}
         {{-- Top bar --}}
         <div class="flex justify-end mb-6">
             <div class="flex items-center bg-white rounded shadow px-4 py-2 space-x-3">
